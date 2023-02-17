@@ -1,5 +1,5 @@
 import React from "react";
-import { Bubble, GiftedChat } from "react-native-gifted-chat";
+import { Bubble, GiftedChat, InputToolbar } from "react-native-gifted-chat";
 import {
   StyleSheet,
   View,
@@ -63,6 +63,7 @@ export default class Chat extends React.Component {
 
   //
   componentDidMount() {
+    console.log("component did mount", Math.random() * 1000);
     //sets user's name is header
     let name = this.props.route.params.name;
     this.props.navigation.setOptions({ title: name });
@@ -190,18 +191,21 @@ export default class Chat extends React.Component {
       />
     );
   }
-  renderInputToolbar(props) {
+
+  renderInputToolbar = (props) => {
     if (this.state.isConnected == false) {
+      // return <Text>app not connected to internet!</Text>;
     } else {
       return <InputToolbar {...props} />;
     }
-  }
+  };
   render() {
     let backgroundColor = this.props.route.params.color;
     return (
       <View style={[styles.container, { backgroundColor }]}>
         <Text>{this.state.loggedInText}</Text>
         <GiftedChat
+          renderInputToolbar={this.renderInputToolbar}
           renderBubble={this.renderBubble.bind(this)}
           messages={this.state.messages}
           onSend={(messages) => this.onSend(messages)}
