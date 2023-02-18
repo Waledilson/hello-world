@@ -16,8 +16,8 @@
 To run Hello World, once it is in your IDE, type "expo start" in the command line.
 </p>
 <br>
- <h4>"dependencies":</h4> {
-    <p>
+<p>
+ <h4>"dependencies": {</h4>
     "@react-native-async-storage/async-storage": "~1.17.3",<br>
     "@react-native-community/masked-view": "^0.1.11",<br>
     "@react-native-community/netinfo": "9.3.0",<br>
@@ -41,7 +41,7 @@ To run Hello World, once it is in your IDE, type "expo start" in the command lin
     "react-native-web": "0.18.9",<br>
     "react-navigation": "^4.4.4"<br>
   },
-  <h4>"devDependencies":</h4> {<br>
+  <h4>"devDependencies": {</h4><br>
     "@babel/core": "^7.9.0"<br>
   }
   </p>
