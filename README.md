@@ -41,7 +41,7 @@ To run Hello World, once it is in your IDE, type "expo start" in the command lin
     "react-native-web": "0.18.9",<br>
     "react-navigation": "^4.4.4"<br>
   },
-  <h4>"devDependencies": {</h4><br>
+  <h4>"devDependencies": {</h4>
     "@babel/core": "^7.9.0"<br>
   }
   </p>
