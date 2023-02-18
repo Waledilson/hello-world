@@ -7,6 +7,9 @@ import {
   Platform,
   KeyboardAvoidingView,
 } from "react-native";
+import { ActionSheetProvider } from "@expo/react-native-action-sheet";
+import CustomActions from "./CustomActions";
+import MapView from "react-native-maps";
 import NetInfo from "@react-native-community/netinfo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 const firebase = require("firebase");
@@ -21,20 +24,13 @@ export default class Chat extends React.Component {
       uid: 0,
       user: {
         _id: "",
+        avatar: "",
         name: "",
       },
+      image: null,
+      location: null,
     };
-    // if (!firebase.apps.length) {
-    //   firebase.initializeApp(firebaseConfig);
-    // }
-    // const firebaseConfig = {
-    //   apiKey: "AIzaSyAHi1wCLcVwD4N1vLC59MThCugZaytXT9Q",
-    //   authDomain: "hello-world-8932e.firebaseapp.com",
-    //   projectId: "hello-world-8932e",
-    //   storageBucket: "hello-world-8932e.appspot.com",
-    //   messagingSenderId: "12408759444",
-    //   appId: "1:12408759444:web:e2121e2f62c2210a6b4081",
-    // };
+
     if (!firebase.apps.length) {
       firebase.initializeApp({
         apiKey: "AIzaSyAHi1wCLcVwD4N1vLC59MThCugZaytXT9Q",
@@ -131,6 +127,8 @@ export default class Chat extends React.Component {
       text: message.text || "",
       createdAt: message.createdAt,
       user: message.user,
+      image: message.image || null,
+      location: message.location || null,
     });
   };
 
@@ -168,7 +166,10 @@ export default class Chat extends React.Component {
         user: {
           _id: data.user._id,
           name: data.user.name,
+          avatar: data.user.avatar || "",
         },
+        image: data.image || null,
+        location: data.location || null,
       });
     });
     this.setState({
@@ -199,26 +200,54 @@ export default class Chat extends React.Component {
       return <InputToolbar {...props} />;
     }
   };
+
+  renderCustomActions = (props) => {
+    return <CustomActions {...props} />;
+  };
+
+  renderCustomView(props) {
+    const { currentMessage } = props;
+    if (currentMessage.location) {
+      return (
+        <MapView
+          style={{ width: 150, height: 100, borderRadius: 13, margin: 3 }}
+          region={{
+            latitude: currentMessage.location.latitude,
+            longitude: currentMessage.location.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        />
+      );
+    }
+    return null;
+  }
+
   render() {
     let backgroundColor = this.props.route.params.color;
     return (
-      <View style={[styles.container, { backgroundColor }]}>
-        <Text>{this.state.loggedInText}</Text>
-        <GiftedChat
-          renderInputToolbar={this.renderInputToolbar}
-          renderBubble={this.renderBubble.bind(this)}
-          messages={this.state.messages}
-          onSend={(messages) => this.onSend(messages)}
-          user={{
-            _id: this.state.uid,
-          }}
-        />
-        {/* if the user is using an android device, 
+      <ActionSheetProvider>
+        <View style={[styles.container, { backgroundColor }]}>
+          <Text>{this.state.loggedInText}</Text>
+          <GiftedChat
+            renderInputToolbar={this.renderInputToolbar.bind(this)}
+            renderBubble={this.renderBubble.bind(this)}
+            renderActions={this.renderCustomActions.bind(this)}
+            renderCustomView={this.renderCustomView}
+            messages={this.state.messages}
+            onSend={(messages) => this.onSend(messages)}
+            user={{
+              _id: this.state.uid,
+              avatar: "https://placeimg.com/140/140/any",
+            }}
+          />
+          {/* if the user is using an android device, 
     this makes it so their keyboard dowsn't hide the chat field */}
-        {Platform.OS === "android" ? (
-          <KeyboardAvoidingView behavior="height" />
-        ) : null}
-      </View>
+          {Platform.OS === "android" ? (
+            <KeyboardAvoidingView behavior="height" />
+          ) : null}
+        </View>
+      </ActionSheetProvider>
     );
   }
 }
