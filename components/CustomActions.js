@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import * as Permissions from "expo-permissions";
 import * as ImagePicker from "expo-image-picker";
 import * as Location from "expo-location";
-import { Camera } from "expo-camera";
 import { connectActionSheet } from "@expo/react-native-action-sheet";
 import firebase from "firebase";
 
