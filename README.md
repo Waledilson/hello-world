@@ -13,7 +13,25 @@
 </ul>
 <br>
 <p>
-To run Hello World, once it is in your IDE, type "expo start" in the command line.
+<h4>
+To run Hello World
+</h4>
+<p>
+Clone repository https://github.com/Waledilson/hello-world.git or "git clone https://github.com/Waledilson/hello-world.git" in the command line <br>
+Install Expo (npm install expo)<br>
+Install dependecies (npm install)<br>
+Create an Expo account and login in the command line with "expo login"<br>
+Run the app by typing "expo start" in the command line and use a device simulator or your own device to use it.<br>
+</p>
+<h4>Database Configuration</h4>
+<p>
+Sign into https://firebase.google.com<br>
+Create new project in Firebase console<br>
+From the dashboard, click "Develop" then "Cloud Firestore" then "Create Databse". When prompted, select "Test Mode"<br>
+Create a new collection called "messages"<br>
+Click "Firestore for Web" or "</>" in "Project Settings"<br>
+Pick a name for the app and click "Register". Copy the credentials and paste them in the cloned repository in your IDE.<br>
+</p>
 </p>
 <br>
 <p>

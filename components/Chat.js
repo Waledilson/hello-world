@@ -12,8 +12,9 @@ import CustomActions from "./CustomActions";
 import MapView from "react-native-maps";
 import NetInfo from "@react-native-community/netinfo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-const firebase = require("firebase");
-require("firebase/firestore");
+// const firebase = require("firebase");
+// require("firebase/firestore");
+import firebase from "firebase";
 
 export default class Chat extends React.Component {
   constructor(props) {
@@ -31,16 +32,16 @@ export default class Chat extends React.Component {
       location: null,
     };
 
-    if (!firebase.apps.length) {
-      firebase.initializeApp({
-        apiKey: "AIzaSyAHi1wCLcVwD4N1vLC59MThCugZaytXT9Q",
-        authDomain: "hello-world-8932e.firebaseapp.com",
-        projectId: "hello-world-8932e",
-        storageBucket: "hello-world-8932e.appspot.com",
-        messagingSenderId: "12408759444",
-        appId: "1:12408759444:web:e2121e2f62c2210a6b4081",
-      });
-    }
+    // if (!firebase.apps.length) {
+    firebase.initializeApp({
+      apiKey: "AIzaSyAHi1wCLcVwD4N1vLC59MThCugZaytXT9Q",
+      authDomain: "hello-world-8932e.firebaseapp.com",
+      projectId: "hello-world-8932e",
+      storageBucket: "hello-world-8932e.appspot.com",
+      messagingSenderId: "12408759444",
+      appId: "1:12408759444:web:e2121e2f62c2210a6b4081",
+    });
+    // }
 
     this.referenceChatMessages = firebase.firestore().collection("messages");
   }
