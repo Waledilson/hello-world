@@ -45,3 +45,4 @@ To run Hello World, once it is in your IDE, type "expo start" in the command lin
     "@babel/core": "^7.9.0"<br>
   }
   </p>
+  <img src="hello-world/assets/hello-world-ss1.PNG">
