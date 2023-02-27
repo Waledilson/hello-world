@@ -63,4 +63,4 @@ Pick a name for the app and click "Register". Copy the credentials and paste the
     "@babel/core": "^7.9.0"<br>
   }
   </p>
-  <img src="hello-world/assets/hello-world-ss1.PNG">
+  <img src="assets/hello-world-ss1.PNG">
